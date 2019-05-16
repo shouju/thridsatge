@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表页</title>
+</head>
+<body>
+    <h2>列表页</h2>
+    {% if allbook %}
+        <ul>
+            {% for book in allbook %}
+            <!--把书名做成一个超级链接 前边虚拟地址不变，后边加上以书名的主键作为虚拟地址 /booktest/detail/-->
+                <li><a href="/booktest/detail/{{book.id}}/">{{ book.title }}</a></li>
+            {% empty %}
+                无书籍信息
+            {% endfor %}
+        </ul>
+    {% else %}
+
+    {% endif %}
+    <br>
+
+    <a href="/booktest/index/">返回首页</a>
+
+</body>
+</html>
