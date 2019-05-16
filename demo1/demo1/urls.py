@@ -24,5 +24,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # 引入外部路由文件
     # 会截取URL里booktest字符串
-    url("booktest/",include("booktest.urls")),
+    url("booktest/",include("booktest.urls",namespace="booktest")),
 ]

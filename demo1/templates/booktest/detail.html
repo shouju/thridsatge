@@ -3,28 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>详情页</title>
+    <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body>
-    <h2>详情页</h2>
-    <br>
+   <div class="container">
+            <h2>详情页</h2>
+        <br>
 
-    {% if book %}
-    <!--双括号一定加上不然会只显示book.title，，等于没有获取书名-->
-    <h3>{{ book.title }}</h3>
-    <ul>
-        <!--遍历书籍内的角色-->
-        {% for hero in book.heroinfo_set.all %}
-            <li>{{ hero.name }}--{{ hero.gender }}--{{ hero.skill }}</li>
-        {% empty %}
-            <li>没有英雄角色</li>
+        {% if book %}
+        <!--双括号一定加上不然会只显示book.title，，等于没有获取书名-->
+        <h3>{{ book.title }}</h3>
+        <ul>
+            <!--遍历书籍内的角色-->
+            {% for hero in book.heroinfo_set.all %}
+                <li>{{ hero.name }}--{{ hero.gender }}--{{ hero.skill }}<a href="{% url 'booktest:deletehero' hero.id %}">删除</a></li>
+            {% empty %}
+                <li>没有英雄角色</li>
 
-        {% endfor %}
-    </ul>
-    {% else %}
-    没有书籍信息
-    {% endif %}
+            {% endfor %}
+        </ul>
+        {% else %}
+        没有书籍信息
+        {% endif %}
 
 
-    <a href="/booktest/list/">返回列表页</a>
+        {# <a href="/booktest/list/">返回列表页</a> #}
+        <a href="{% url 'booktest:list' %}">返回列表页</a>
+        <img src="/static/img/a1.jpg" alt="" width="600" height="300">
+   </div>
 </body>
 </html>
