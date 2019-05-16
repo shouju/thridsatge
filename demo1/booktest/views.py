@@ -54,13 +54,81 @@ def detail(request,id):
 
 def deletebook(request,id):
     # return HttpResponse("success")
+    # 删除英雄   通过书名的id删除
     Bookinfo.objects.get(pk=id).delete()
+    # 返回已删除的书籍列表页面
     return HttpResponseRedirect(redirect_to="/booktest/list/")
 
 def deletehero(request,id):
     # return HttpResponse("success")
+    # 通过id获取永雄
     hero=Heroinfo.objects.get(pk=id)
+    # 通过英雄获取书籍的id
     bookid=hero.book.id
+    # 删除英雄
     hero.delete()
+    # 返回已删除后英雄的界面         通过书籍的id进入该书籍的已删除的英雄列表
     return HttpResponseRedirect(redirect_to="/booktest/detail/%s/"%(bookid))
+
+def addhero(request,id):
+    # return HttpResponse("添加
+    if request.method=="GET":
+        return render(request,"booktest/addhero.html",{"bookid":id})
+    elif request.method=="POST":
+        book=Bookinfo.objects.get(pk=id)
+        hero=Heroinfo()
+        hero.name=request.POST["username"]
+        value=request.POST["sex"]
+        hero.gendle=value
+        hero.skill=request.POST["skill"]
+        hero.book=book
+        hero.save()
+        return HttpResponseRedirect("/booktest/detail/%s/"%(id,))
+
+def updatehero(request,id):
+    if request.method=="GET":
+        return render(request,"booktest/updatehero.html",{"heroid":id})
+    elif request.method=="POST":
+        hero = Heroinfo.objects.get(pk=id)
+        bookid=hero.book
+        hero.name = request.POST["username"]
+        value = request.POST["sex"]
+        hero.gendle = value
+        hero.skill = request.POST["skill"]
+        hero.book = bookid
+        hero.save()
+        return HttpResponseRedirect("/booktest/detail/" )
+
+def addbook(request):
+    if request.method=="GET":
+        return render(request,"booktest/addbook.html")
+    elif request.method=="POST":
+        print('post')
+        book=Bookinfo()
+        book.title=request.POST["bid"]
+        book.pub_date=request.POST["time"]
+        book.save()
+        return HttpResponseRedirect("/booktest/list/")
+
+def updatebook(request,id):
+    if request.method=="GET":
+        return render(request,"booktest/updatebook.html",{"bookid":id})
+    elif request.method=="POST":
+        book=Bookinfo.objects.get(pk=id)
+        book.title = request.POST["bid"]
+        book.pub_date = request.POST["time"]
+        book.save()
+        return HttpResponseRedirect("/booktest/list/")
+    # return HttpResponse("修改成功")
+
+
+        # return HttpResponse("添加成功")
+
+
+
+
+
+
+
+
 

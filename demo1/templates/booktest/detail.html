@@ -16,7 +16,10 @@
         <ul>
             <!--遍历书籍内的角色-->
             {% for hero in book.heroinfo_set.all %}
-                <li>{{ hero.name }}--{{ hero.gender }}--{{ hero.skill }}<a href="{% url 'booktest:deletehero' hero.id %}">删除</a></li>
+                <li>{{ hero.name }}--{{ hero.gendle }}--{{ hero.skill }}<a href="{% url 'booktest:deletehero' hero.id %}">---删除</a><a href="{% url 'booktest:updatehero' hero.id %}">--修改</a></li>
+                    {# <a href="{% 'booktest:updatehero' %}">--修改</a></li> #}
+
+
             {% empty %}
                 <li>没有英雄角色</li>
 
@@ -25,10 +28,16 @@
         {% else %}
         没有书籍信息
         {% endif %}
-
+       <a href="{% url 'booktest:addhero' book.id %}">添加英雄</a>
+       <br>
 
         {# <a href="/booktest/list/">返回列表页</a> #}
         <a href="{% url 'booktest:list' %}">返回列表页</a>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <img src="/static/img/a1.jpg" alt="" width="600" height="300">
    </div>
 </body>

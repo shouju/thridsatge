@@ -13,7 +13,8 @@
                 {% for book in allbook %}
                 <!--把书名做成一个超级链接 前边虚拟地址不变，后边加上以书名的主键作为虚拟地址 /booktest/detail/-->
                 {# <li><a href="/booktest/detail/{{book.id}}/">{{ book.title }}</a></li> #}
-                <li><a href="{% url 'booktest:detail' book.id %}">{{ book.title }}</a><a href="{% url 'booktest:deletebook' book.id %}">删除</a></li>
+                <li><a href="{% url 'booktest:detail' book.id %}">{{ book.title }}--{{ book.pub_date }}</a><a href="{% url 'booktest:deletebook' book.id %}">--删除</a><a
+                        href="{% url 'booktest:updatebook' book.id %}">--修改</a></li>
                 {% empty %}
                     无书籍信息
                 {% endfor %}
@@ -21,9 +22,15 @@
         {% else %}
 
         {% endif %}
-        <br>
+        <a href="{% url 'booktest:addbook'%}">添加书籍</a>
 
+        <br>
         <a href="/booktest/index/">返回首页</a>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
         <img src="/static/img/a1.jpg" alt="" width="600" height="300">
     </div>
 
