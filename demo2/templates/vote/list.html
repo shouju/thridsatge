@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票列表</title>
+</head>
+<body>
+    <h1>选择你的感兴趣的</h1>
+    <br>
+    {% if allvote %}
+        <ul>
+            {% for vote in allvote %}
+                <li>{{ vote.matter }}</li>
+            {% empty %}
+
+            {%  endfor %}
+        </ul>
+    {% else %}
+    {% endif %}
+
+    <a href="{% url 'vote:index'%}">返回首页</a>
+
+</body>
+</html>
