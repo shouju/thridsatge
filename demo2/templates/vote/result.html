@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>投票结果</title>
+</head>
+<body>
+    <b2>该投票历史结果为</b2>
+    {% if vote %}
+        {{ vote.matter }}<br>
+        {{ vote.choose1 }}--{{  vote.choose1vote }}<br>
+        {{ vote.choose2 }}--{{  vote.choose2vote }}<br>
+    {% else %}
+    {% endif %}
+
+</body>
+</html>

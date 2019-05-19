@@ -7,5 +7,21 @@
 <body>
     <h1>投票</h1>
 
+
+
+        {% if vote %}
+        <form action="#" method="POST">
+            {{ vote.matter }}<br>
+            <input type="radio" name="choose" value="1">{{ vote.choose1}}<br>
+            <input type="radio" name="choose" value="2">{{ vote.choose2}}<br><input type="submit" value="提交">
+        </form>
+        {% else %}
+            wu
+
+        {% endif %}
+
+
+
+
 </body>
 </html>

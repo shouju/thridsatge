@@ -5,12 +5,12 @@
     <title>投票列表</title>
 </head>
 <body>
-    <h1>选择你的感兴趣的</h1>
+    <h1>选择你的感兴趣的投票</h1>
     <br>
     {% if allvote %}
         <ul>
             {% for vote in allvote %}
-                <li>{{ vote.matter }}</li>
+                <li><a href="/vote/detail/{{vote.id}}/">{{ vote.matter }}</a></li>
             {% empty %}
 
             {%  endfor %}

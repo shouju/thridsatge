@@ -22,6 +22,6 @@ from django.http import HttpResponse
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url('vote/',include('vote.urls')),
+    url('vote/',include('vote.urls',namespace='vote')),
 
 ]
