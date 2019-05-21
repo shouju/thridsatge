@@ -5,6 +5,7 @@ from . import views
 app_name="vote"
 
 urlpatterns =[
+    url(r"^login/$",views.login,name="login"),
     url(r"^index/$",views.index,name="index"),
     url(r"^list/$",views.list,name="list"),
     url(r'^detail/(\d+)/$',views.detail,name='detail'),

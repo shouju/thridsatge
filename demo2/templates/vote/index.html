@@ -5,9 +5,12 @@
     <title>首页</title>
 </head>
 <body>
-    <h1>欢迎来到投票家园</h1>
-    {{ username }}<br><br>
-    <a href="{% url 'vote:list'%}">进入投票列表</a><br><br>
+    <div class="container">
+        <h1>欢迎来到投票家园</h1>
+        {{ username }}<br><br>
+        <a href="{% url 'vote:list'%}">进入投票列表</a><br><br>
+    </div>
+
 
 </body>
 </html>

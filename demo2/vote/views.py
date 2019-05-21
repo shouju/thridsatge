@@ -1,9 +1,34 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,reverse
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from .models import VoteInfo
+from django.views.generic import View
 
 # Create your views here.
+
+def login(request):
+    if request.method == "GET":
+        return render(request, 'vote/login.html')
+    else:
+        username = request.POST.get("username")
+        if username == "zzy":
+            # 登录成功之后需要将用户相关cookie存储
+            res = redirect(reverse('vote:index'))
+            # 设置cookit完成登录
+            # res.set_cookie("username", username)
+            # 通过session完成登录
+            request.session["username"] = username
+            return res
+        else:
+            return render(request, 'vote/login.html', {"error": "用户名错误"})
+
+def logout(request):
+    res = redirect(reverse('vote:login'))
+    # res.delete_cookie("username")
+    # 清除session登录信息
+    request.session.flush()
+    return res
+
 
 def index(request):
     contex={'username':'zwj'}

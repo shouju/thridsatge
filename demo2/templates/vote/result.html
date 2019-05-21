@@ -5,13 +5,15 @@
     <title>投票结果</title>
 </head>
 <body>
-    <b2>该投票历史结果为</b2>
-    {% if vote %}
+    <div class="container">
+        <b2>该投票历史结果为</b2>
+        {% if vote %}
         {{ vote.matter }}<br>
         {{ vote.choose1 }}--{{  vote.choose1vote }}<br>
         {{ vote.choose2 }}--{{  vote.choose2vote }}<br>
-    {% else %}
-    {% endif %}
+        {% else %}
+        {% endif %}
 
+    </div>
 </body>
 </html>
