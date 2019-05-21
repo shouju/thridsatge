@@ -7,9 +7,13 @@
 <body>
     <div class="container">
         <h1>欢迎来到投票家园</h1>
+        {{ request.user }}
+
+        <a href="{% url 'vote:login' %}">登录</a><a href="{% url 'vote:logout' %}">退出</a>
         {{ username }}<br><br>
         <a href="{% url 'vote:list'%}">进入投票列表</a><br><br>
     </div>
+    <a href="{% url 'vote:suggest' %}">建议</a>
 
 
 </body>

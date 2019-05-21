@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -12,5 +13,11 @@ class VoteInfo(models.Model):
 
     def __str__(self):
         return self.matter
+
+class MyUser(User):
+    url = models.URLField(blank=True, null=True, default="http://www.baidu.com")
+    class Meta():
+        verbose_name = "用户"
+        verbose_name_plural = verbose_name
 
 
