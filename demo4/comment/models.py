@@ -1,10 +1,15 @@
 from django.db import models
 from blog.models import Article
+from datetime import datetime
 # Create your models here.
 
 class Comment(models.Model):
     title=models.CharField(max_length=50,verbose_name="评论")
+    email=models.EmailField(blank=True,null=True)
+    url=models.URLField(blank=True,null=True)
+    content=models.CharField(max_length=500)
     article=models.ForeignKey(Article,on_delete=models.CASCADE)
+    create_time=models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title

@@ -19,6 +19,9 @@ from django.conf.urls import url,include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url('',include('blog.urls',namespace='blog')),
+
     url('comment/',include('comment.urls',namespace='comment')),
+
+
+    url('',include('blog.urls',namespace='blog')),
 ]

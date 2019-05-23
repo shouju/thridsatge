@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'blog',
     'comment',
+    # 使用第三方的静态资源需要注册第三方的应用
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +128,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
+
+TINYMCE_DEFAULT_CONFIG = {
+'theme': 'advanced',
+'width': 600,
+'height': 400,
+}
