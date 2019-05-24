@@ -1,10 +1,12 @@
-from django.shortcuts import render,redirect,reverse
+from django.shortcuts import render,redirect,reverse,get_object_or_404
 from django.http import HttpResponse,HttpResponseRedirect
 from django.template import loader
 from .models import VoteInfo,MyUser
 from django.views.generic import View
 from django.contrib.auth import authenticate,login as lgi,logout as lgo
 from .util import checklogin
+from django.conf import settings
+from django.core.mail import send_mail
 
 # Create your views here.
 
@@ -14,15 +16,29 @@ def login(request):
     else:
         username=request.POST.get('login_name')
         pwd=request.POST.get('login_pwd')
-        user=authenticate(request,username=username,password=pwd)
-    if user:
-        lgi(request,user)
-        return redirect(reverse('vote:index'))
-    # return HttpResponseRedirect(request,'/vote/index/%s'%(id,))
-    else:
-        error=None
-        error="用户名或者密码错误"
-        return render(request,'vote/login.html',{"error":error})
+        # user=authenticate(request,username=username,password=pwd)
+        user=get_object_or_404(MyUser,username=username)
+        if not user.is_active:
+            return render(request, 'vote/login.html', {"error": "用户尚未激活"})
+        else:
+            check=user.check_password(pwd)
+            if check:
+                lgi(request, user)
+                print(check, '????????')
+                return redirect(reverse('vote:index'))
+            else:
+                return render(request, 'vote/login.html', {"error": "用户名或密码错误"})
+    # if user:
+    #     if user.is_active:
+    #         lgi(request,user)
+    #         return redirect(reverse('vote:index'))
+    #     else:
+    #         return render(request, 'vote/login.html', {"error": "用户尚未激活"})
+    # # return HttpResponseRedirect(request,'/vote/index/%s'%(id,))
+    # else:
+    #     error=None
+    #     error="用户名或者密码错误"
+    #     return render(request,'vote/login.html',{"error":error})
     # if request.method == "GET":
     #     return render(request, 'vote/login.html')
     # else:
@@ -49,13 +65,18 @@ def register(request):
         username=request.POST.get('regis_name')
         pwd=request.POST.get('regis_pwd')
         pwd2 = request.POST.get('regis_pwd1')
+        email=request.POST.get('email')
         print(username,pwd,pwd2)
         error=None
         if pwd!=pwd2:
             error = "密码不一致"
             return render(request,'vote/login.html',{"error":error})
         else:
-            MyUser.objects.create_user(username=username,password=pwd)
+            user=MyUser.objects.create_user(username=username,password=pwd)
+            print(user.id,user.is_active)
+            user.is_active=False
+            user.save()
+
             return redirect(reverse('vote:login'))
 
 def change_pwd(request):
