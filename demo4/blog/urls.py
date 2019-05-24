@@ -9,7 +9,8 @@ urlpatterns = [
     url(r'^category/(\d+)/$',views.category,name='category'),
     url(r'^tag/(\d+)/$',views.tag,name='tag'),
     url(r'^rss/$',feed.BlogFeed(),name='rss'),
-    url(r'^contactus/$',views.contactus,name='contactus'),
-    url(r'^addsuggest/$',views.addsuggest,name='addsuggest'),
+    # url(r'^contactus/$',views.contactus,name='contactus'),
+    url(r'^contactus/$',views.Contacts.as_view(),name='contactus'),
+    url(r'^addads/$',views.Adds.as_view(),name='addads'),
     url(r'^$',views.index,name='index'),
     ]

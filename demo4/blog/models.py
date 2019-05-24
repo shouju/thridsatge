@@ -47,3 +47,14 @@ class MessageInfo(models.Model):
     # bushi 不是Django的原生类型
     info=HTMLField()
 
+class Ads(models.Model):
+    img=models.ImageField(upload_to='ads',verbose_name='广告图片')
+    desc=models.CharField(max_length=30,verbose_name='图片描述')
+    def __str__(self):
+        return self.desc
+
+
+    class Meta():
+        verbose_name='轮播图'
+        verbose_name_plural=verbose_name
+

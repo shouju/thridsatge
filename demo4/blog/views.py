@@ -1,10 +1,13 @@
 from django.shortcuts import render,get_object_or_404,redirect,reverse
 from django.http import HttpResponse
-from .models import Article,Category,Tag,MessageInfo
+from .models import Article,Category,Tag,MessageInfo,Ads
 import markdown
 from comment. forms import CommentForm
+from django.views.generic import View
 # 分页器
 from django.core.paginator import Paginator
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 
 def index(request):
@@ -71,25 +74,36 @@ def tag(request,id):
     page = paginator.get_page(1)
     return render(request, 'index.html', {'page': page})
 
-def contactus(request):
-    return render(request,'contact.html')
+class Contacts(View):
+    def get(self,request):
+        cf=CommentForm()
+        return render(request, 'contact.html',locals())
 
-def addsuggest(request):
-    if request.method == 'POST':
-        username=request.POST.get('name')
-        email=request.POST.get('email')
-        subject=request.POST.get('subject')
-        info=request.POST.get('message')
+    def post(self,request):
+        # return HttpResponse('fasong')
 
-        suggest=MessageInfo()
+        from django.conf import settings
+        send_mail("Django邮件0", "Django可以发送邮件", settings.DEFAULT_FROM_EMAIL, ["1120648012@qq.com",'shoujut163.com'])
+        return redirect(reverse('blog:contactus'))
 
-        suggest.username=username
-        suggest.email=email
-        suggest.subject=subject
-        suggest.info=info
 
-        suggest.save()
-        return redirect(reverse('#'))
+class Adds(View):
+    def get(self,request):
+        return render(request,'addads.html')
+
+    def post(self,request):
+        img=request.FILES['img']
+        desc=request.POST.get('desc')
+
+        ad=Ads(img=img,desc=desc)
+        ad.save()
+
+        return redirect(reverse('blog:index'))
+
+
+
+
+
 
 
 
