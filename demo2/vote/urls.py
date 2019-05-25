@@ -13,5 +13,8 @@ urlpatterns =[
     url(r'^detail/(\d+)/$',views.detail,name='detail'),
     url(r'^result/(\d+)/$',views.result,name='result'),
     url(r'^suggest/$',views.suggest,name='suggest'),
+    # .*?  匹配所有
+    url(r'^active/(.*?)/$',views.active,name='active'),
+    url(r'^verify/$',views.verify,name='verify'),
     url(r'^change_pwd',views.change_pwd,name='change_pwd'),
 ]
