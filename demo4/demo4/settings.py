@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'comment',
     # 使用第三方的静态资源需要注册第三方的应用
     'tinymce',
+    'haystack',
 ]
 
 MIDDLEWARE = [
@@ -148,3 +149,10 @@ DEFAULT_FROM_EMAIL ='zzy0371 <18137128152@163.com>'
 # 添加图片配置
 MEDIA_ROOT=os.path.join(BASE_DIR,"static/media")
 
+#
+# HAYSTACK_CONNECTIONS = {
+# 'default': {
+# 'ENGINE': blog.whoosh_cn_backend.WhooshEngine',
+# 'PATH': os.path.join(BASE_DIR, 'whoosh_index'),
+# }
+# }

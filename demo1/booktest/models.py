@@ -21,3 +21,26 @@ class Heroinfo(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class ManageExt(models.Manager):
+
+    def createtestmodel2(self,_title):
+        t=self.model()
+        t.title=_title
+        t.save()
+
+    def deletetestmodel2(self,_pk):
+        self.get(pk=_pk).delete()
+
+
+class TestModel(models.Model):
+    title=models.CharField(max_length=20)
+    manage=models.Manager()
+    manage2=ManageExt()
+
+    @classmethod
+    def createtestmodel(cls,_title):
+        t=cls(title=_title)
+        t.title=_title
+        t.save()

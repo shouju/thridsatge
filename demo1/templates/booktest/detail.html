@@ -11,13 +11,13 @@
         <br>
 
         {% if book %}
+        {hero}
         <!--双括号一定加上不然会只显示book.title，，等于没有获取书名-->
         <h3>{{ book.title }}</h3>
         <ul>
             <!--遍历书籍内的角色-->
             {% for hero in book.heroinfo_set.all %}
                 <li>{{ hero.name }}--{{ hero.gendle }}--{{ hero.skill }}<a href="{% url 'booktest:deletehero' hero.id %}">---删除</a><a href="{% url 'booktest:updatehero' hero.id %}">--修改</a></li>
-                    {# <a href="{% 'booktest:updatehero' %}">--修改</a></li> #}
 
 
             {% empty %}

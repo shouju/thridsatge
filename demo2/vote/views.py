@@ -165,6 +165,15 @@ def verify(request):
     # 将内存中的图片数据返回给客户端，MIME类型为图片png
     return HttpResponse(f.getvalue(), 'image/png')
 
+def checkuser(request):
+    if request.method=='POST':
+        login_name=request.POST.get('login_name')
+        print(login_name)
+        if MyUser.objects.filter(login_name=login_name).first():
+            return HttpResponse("用户存在")
+        else:
+            return HttpResponse("用户bu存在")
+
 
 def change_pwd(request):
     if request.method=="GET":

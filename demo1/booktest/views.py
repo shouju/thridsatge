@@ -86,18 +86,16 @@ def addhero(request,id):
         return HttpResponseRedirect("/booktest/detail/%s/"%(id,))
 
 def updatehero(request,id):
+    hero=Heroinfo.objects.get(pk=id)
     if request.method=="GET":
-        return render(request,"booktest/updatehero.html",{"heroid":id})
+        return render(request,"booktest/updatehero.html",{"hero":hero})
+
     elif request.method=="POST":
-        hero = Heroinfo.objects.get(pk=id)
-        bookid=hero.book
         hero.name = request.POST["username"]
-        value = request.POST["sex"]
-        hero.gendle = value
+        hero.gendle= request.POST["sex"]
         hero.skill = request.POST["skill"]
-        hero.book = bookid
         hero.save()
-        return HttpResponseRedirect("/booktest/detail/" )
+        return HttpResponseRedirect("/booktest/detail/%s/"%(hero.book.id))
 
 def addbook(request):
     if request.method=="GET":
@@ -111,10 +109,10 @@ def addbook(request):
         return HttpResponseRedirect("/booktest/list/")
 
 def updatebook(request,id):
+    book=Bookinfo.objects.get(pk=id)
     if request.method=="GET":
         return render(request,"booktest/updatebook.html",{"bookid":id})
     elif request.method=="POST":
-        book=Bookinfo.objects.get(pk=id)
         book.title = request.POST["bid"]
         book.pub_date = request.POST["time"]
         book.save()
@@ -123,6 +121,7 @@ def updatebook(request,id):
 
 
         # return HttpResponse("添加成功")
+
 
 
 
