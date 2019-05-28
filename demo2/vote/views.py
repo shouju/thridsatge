@@ -11,6 +11,7 @@ from PIL import Image,ImageDraw,ImageFont
 import random,os,io
 # 引入序列化加密
 from itsdangerous import TimedJSONWebSignatureSerializer as Tjws,SignatureExpired
+from django.core.cache import cache
 
 # Create your views here.
 
@@ -21,7 +22,10 @@ def login(request):
         username=request.POST.get('login_name')
         pwd=request.POST.get('login_pwd')
         verifycode=request.POST.get('verify')
-        if verifycode==request.session.get('verifycode'):
+        # 妖cache储存数据
+        if verifycode == cache.git('verifycode'):
+        #     用session
+        # if verifycode==request.ses储存数据sion.get('verifycode'):
             # user=authenticate(request,username=username,password=pwd)
             user = get_object_or_404(MyUser, username=username)
             if not user.is_active:
@@ -159,6 +163,9 @@ def verify(request):
     draw.text((75, 2), rand_str[3])
     # 释放画笔
     del draw
+    cache.set['verifycode',rand_str,500]
+
+
     request.session['verifycode'] = rand_str
     f = io.BytesIO()
     im.save(f, 'png')
