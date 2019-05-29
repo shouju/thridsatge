@@ -120,3 +120,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS=[os.path.join(BASE_DIR,'static')]
+# 添加图片配置
+MEDIA_ROOT = os.path.join(BASE_DIR,'static/media')
+
