@@ -85,16 +85,16 @@
     <div class="container-fluid p-sm-0">
 
         <div class="row featured-post-slider">
-            {% for d in dynamics %}
+            {% for dynamic in page.object_list %}
             <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 px-1">
 
                 <article class="card bg-dark text-center text-white border-0 rounded-0">
-                    <img class="card-img rounded-0 img-fluid w-100" src="/static/media/{{d.img}}" alt="post-thumb">
+                    <img class="card-img rounded-0 img-fluid w-100" src="/static/media/{{dynamic.img}}" alt="post-thumb">
                     <div class="card-img-overlay">
                         <div class="card-content">
-                            <p class="text-uppercase">{{ d.title }}</p>
-                            <h4 class="card-title mb-4"><a class="text-white" href="{% url 'blog:detail' d.id %}">{{ d.categories.title }}</a></h4>
-                            <a class="btn btn-outline-light" href="{% url 'blog:detail' d.id %}">查看全文</a>
+                            <p class="text-uppercase">{{ dynamic.title }}</p>
+                            <h4 class="card-title mb-4"><a class="text-white" href="{% url 'blog:detail' dynamic.id %}">{{ dynamic.categories.title }}</a></h4>
+                            <a class="btn btn-outline-light" href="{% url 'blog:detail' dynamic.id %}">查看全文</a>
                         </div>
                     </div>
                 </article>
