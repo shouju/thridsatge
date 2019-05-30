@@ -57,21 +57,22 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'blog:index' %}">主页</a>
-                        <a class="dropdown-item" href="{% url 'blog:indexone' %}">主主页</a>
+                        <a class="dropdown-item" href="{% url 'blog:indexone' %}">副页</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase text-dark" href="{% url 'blog:about' %}">About</a>
+                    <a class="nav-link text-uppercase text-dark" href="{% url 'blog:about' %}">介绍</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase text-dark" href="{% url 'blog:detail' 12 %}">Blog</a>
+                    <a class="nav-link text-uppercase text-dark" href="{% url 'blog:detail' 12 %}">文章</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase text-dark" href="{% url 'blog:contact' %}">Contact</a>
+                    <a class="nav-link text-uppercase text-dark" href="{% url 'blog:contact' %}">建议</a>
                 </li>
             </ul>
-            <form class="form-inline position-relative ml-lg-4">
-                <input class="form-control px-0 w-100" type="search" placeholder="Search">
+            <form class="form-inline position-relative ml-lg-4" method="get" action="/search/" id="searchform">
+
+                <input class="form-control px-0 w-100" type="search" placeholder="查询" required name="q">
                 <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
             </form>
         </div>
@@ -82,13 +83,17 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-12">
-        <h2 class="mb-4">About Me</h2>
+        <h2 class="mb-4">简介</h2>
         <img src="/static/images/author.jpg" alt="author" class="img-fluid w-100 mb-4">
-        <h3 class="font-weight-light">Hello, I’m <span class="font-weight-bold">John Doe</span></h3>
-        <p>Creative UI/UX desingerr how loves to craft beautiful that satisfy users needs the product. A best idea generate for the agency complay smart and elegant design When, while the lovely valley teems with vapour around me, and the meridian sun strikes the upper surface of the impenetrable foliage of my trees, and but a few stray gleams steal into the inner sanctuary, I throw myself down among the tall grass by the trickling stream; and, as I lie close to the earth, a thousand unknown plants are noticed by me.<br><br> I hear the buzz of the little world among the stalks, and grow familiar with the countless indescribable forms of the insects and flies, then I feel the presence of the Almighty, who formed us in his own image, and the breath of that universal love which bears and sustains.</p>
-      </div>
+        <h3 class="font-weight-light">您好<span class="font-weight-bold">我是不二大叔</span></h3>
+        <p>微博2018十大影响力情感大V 知名情感博主 头条文章作者 微博签约自媒  <p>
+          <p>诚接各种广告  </p>
+          <p>联系电话：17737713663</p>
+          <p>邮箱：shoujut@163.com/27445831@qq.com</p>
     </div>
   </div>
+      </div>
+
 </section>
 
 
@@ -102,40 +107,48 @@
 <!-- /instagram -->
 
 <footer>
-  <div class="section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="index.html"><img src="/static/images/logo.png" alt="persa" class="img-fluid"></a>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <a href="{% url 'blog:about' %}"><img src="/static/images/logo.png" alt="persa" class="img-fluid"></a>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <ul class="list-unstyled">
+                        <li class="font-secondary text-dark">郑州</li>
+                        <li class="font-secondary text-dark">红旗路-东三街-先锋商务3楼</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <ul class="list-unstyled">
+                        <li class="font-secondary text-dark">17737713663</li>
+                        <li class="font-secondary text-dark">shoujut@163.com</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <span class="font-secondary text-dark mr-3">转发</span>
+                    <ul class="list-inline d-inline-block">
+                        <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-twitter-alt"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-linkedin"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-github"></i></a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <ul class="list-unstyled">
-            <li class="font-secondary text-dark">Sydney</li>
-            <li class="font-secondary text-dark">6 rip carl Avenue CA 90733</li>
-          </ul>
-        </div>
-        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <ul class="list-unstyled">
-            <li class="font-secondary text-dark">Tel: +90 000 333 22</li>
-            <li class="font-secondary text-dark">Mail: exmaple@ymail.com</li>
-          </ul>
-        </div>
-        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <span class="font-secondary text-dark mr-3">Follow</span>
-          <ul class="list-inline d-inline-block">
-            <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-facebook"></i></a></li>
-            <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
-            <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-linkedin"></i></a></li>
-            <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-github"></i></a></li>
-          </ul>
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="text-center">
-    <p>Copyright ©<script>var CurrentYear = new Date().getFullYear()
-    document.write(CurrentYear)</script> a theme by themefisher / More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
-  </div>
+
+
+    <div class="text-center">
+        <p>Copyright ©
+            <script>var CurrentYear = new Date().getFullYear()
+    document.write(CurrentYear)
+            </script>
+            a theme by themefisher / More Templates <a href="http://qikuedu.com/" target="_blank"
+                                                       title="模板之家">奇酷出品</a> - Collect from <a
+                    href="http://qikuedu.com/" title="网页模板" target="_blank">来自-手鞠</a></p>
+    </div>
 </footer>
 
 <!-- jQuery -->
@@ -149,11 +162,11 @@
 <!-- instafeed -->
 <script src="/static/plugins/instafeed/instafeed.min.js"></script>
 <!-- smooth scroll -->
-<script src="plugins/smooth-scroll/smooth-scroll.js"></script>
+<script src="/static/plugins/smooth-scroll/smooth-scroll.js"></script>
 <!-- headroom -->
-<script src="plugins/headroom/headroom.js"></script>
+<script src="/static/plugins/headroom/headroom.js"></script>
 <!-- reading time -->
-<script src="plugins/reading-time/readingTime.min.js"></script>
+<script src="/static/plugins/reading-time/readingTime.min.js"></script>
 
 <!-- Main Script -->
 <script src="/static/js/script.js"></script>

@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404,redirect,reverse
+from django.shortcuts import render,get_object_or_404,redirect,reverse,HttpResponse
 from . models import Categories,Tag,Dynamic
 from django.core.paginator import Paginator
 from django.views.generic import View
@@ -13,7 +13,7 @@ def index(request):
     else:
         pagenum=pagenum
     dynamics=Dynamic.objects.all().order_by('-views')
-    paginator=Paginator(dynamics,6)
+    paginator=Paginator(dynamics,9)
     page=paginator.get_page(pagenum)
 
     return render(request,'blog/index.html',{'page':page})
@@ -25,7 +25,7 @@ def indexone(request):
     else:
         pagenum = pagenum
     dynamics=Dynamic.objects.all().order_by('-views')
-    paginator = Paginator(dynamics, 6)
+    paginator = Paginator(dynamics, 9)
     page = paginator.get_page(pagenum)
     return render(request, 'blog/homepage-2.html',{'page':page})
 
@@ -46,21 +46,33 @@ class Contact(View):
 
 
 def categories(request,id):
-    dynamics=get_object_or_404(Categories,pk=id).dynamic_set.all()
+
+    pagenum = request.GET.get('page')
+    if pagenum == None:
+        pagenum = 1
+    else:
+        pagenum = pagenum
+    # return HttpResponse('success')
+    dynamics= get_object_or_404(Categories, pk=id).dynamic_set.all()
+
     paginator = Paginator(dynamics, 6)
-    page = paginator.get_page(6)
+    page = paginator.get_page(pagenum)
     return render(request, 'blog/homepage-2.html', {'page': page})
 
 
-# pagenum = request.GET.get('page')
-    # if pagenum == None:
-    #     pagenum = 1
-    # else:
-    #     pagenum = pagenum
-    # dynamics=get_object_or_404(Categories,pk=id).dynamic_set.all()
-    # paginator = Paginator(dynamics, 6)
-    # page = paginator.get_page(pagenum)
-    # return render(request, 'blog/homepage-2.html', {'page': page})
+def tags(request, id):
+    pagenum = request.GET.get('page')
+    if pagenum == None:
+        pagenum = 1
+    else:
+        pagenum = pagenum
+    dynamics = get_object_or_404(Tag, pk=id).dynamic_set.all()
+    paginator = Paginator(dynamics, 6)
+    page = paginator.get_page(pagenum)
+    return render(request, 'blog/homepage-2.html', {'page': page})
+
+
+
 
 
 

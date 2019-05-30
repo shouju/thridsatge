@@ -59,21 +59,22 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{% url 'blog:index' %}">主页</a>
-                        <a class="dropdown-item" href="{% url 'blog:indexone' %}">主主页</a>
+                        <a class="dropdown-item" href="{% url 'blog:indexone' %}">副页</a>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase text-dark" href="{% url 'blog:about' %}">About</a>
+                    <a class="nav-link text-uppercase text-dark" href="{% url 'blog:about' %}">介绍</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase text-dark" href="{% url 'blog:detail' 12 %}">Blog</a>
+                    <a class="nav-link text-uppercase text-dark" href="{% url 'blog:detail' 12 %}">文章</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-uppercase text-dark" href="{% url 'blog:contact' %}">Contact</a>
+                    <a class="nav-link text-uppercase text-dark" href="{% url 'blog:contact' %}">建议</a>
                 </li>
             </ul>
-            <form class="form-inline position-relative ml-lg-4">
-                <input class="form-control px-0 w-100" type="search" placeholder="Search">
+            <form class="form-inline position-relative ml-lg-4" method="get" action="/search/" id="searchform">
+
+                <input class="form-control px-0 w-100" type="search" placeholder="查询" required name="q">
                 <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
             </form>
         </div>
@@ -107,11 +108,14 @@
         </div>
       </div>
       <div class="col-lg-4">
-        <div class="widget search-box">
-          <i class="ti-search"></i>
-          <input type="search" id="search-post" class="form-control border-0 pl-5" name="search-post"
-            placeholder="Search">
-        </div>
+
+
+          <form class="form-inline position-relative ml-lg-4" method="get" action="/search/" id="searchfor">
+
+                <input class="form-control px-0 w-100" type="search" placeholder="Search" required name="q">
+                <button class="search-icon" type="submit"><i class="ti-search text-dark"></i></button>
+            </form>
+
         <div class="widget">
           <h6 class="mb-4">最近更新</h6>
           {% getlaterdynamics 3 as laterdynamics %}
@@ -135,7 +139,7 @@
           <ul class="list-inline tag-list">
               {% gettags as tags %}
               {% for tag in tags %}
-                  <li class="list-inline-item m-1"><a href="{% url 'blog:detail' tag.id %}">{{ tag.title }}</a></li>
+                  <li class="list-inline-item m-1"><a href="{% url 'blog:tags' tag.id %}">{{ tag.title }}</a></li>
               {% endfor %}
 
           </ul>
@@ -145,7 +149,7 @@
           <ul class="list-inline tag-list">
             {% getcategories as categories %}
             {% for category in categories %}
-                <li class="list-inline-item m-1"><a href="#">{{ category.title }}</a></li>
+                <li class="list-inline-item m-1"><a href="{% url 'blog:categories' category.id %}">{{ category.title }}</a></li>
 
             {% endfor %}
           </ul>
@@ -157,40 +161,48 @@
 <!-- /blog single -->
 
 <footer>
-  <div class="section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <a href="index.html"><img src="/static/images/logo.png" alt="persa" class="img-fluid"></a>
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <a href="{% url 'blog:about' %}"><img src="/static/images/logo.png" alt="persa" class="img-fluid"></a>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <ul class="list-unstyled">
+                        <li class="font-secondary text-dark">郑州</li>
+                        <li class="font-secondary text-dark">红旗路-东三街-先锋商务3楼</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <ul class="list-unstyled">
+                        <li class="font-secondary text-dark">17737713663</li>
+                        <li class="font-secondary text-dark">shoujut@163.com</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+                    <span class="font-secondary text-dark mr-3">转发</span>
+                    <ul class="list-inline d-inline-block">
+                        <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-facebook"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-twitter-alt"></i></a>
+                        </li>
+                        <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-linkedin"></i></a></li>
+                        <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-github"></i></a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <ul class="list-unstyled">
-            <li class="font-secondary text-dark">Sydney</li>
-            <li class="font-secondary text-dark">6 rip carl Avenue CA 90733</li>
-          </ul>
-        </div>
-        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <ul class="list-unstyled">
-            <li class="font-secondary text-dark">Tel: +90 000 333 22</li>
-            <li class="font-secondary text-dark">Mail: exmaple@ymail.com</li>
-          </ul>
-        </div>
-        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
-          <span class="font-secondary text-dark mr-3">Follow</span>
-          <ul class="list-inline d-inline-block">
-            <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-facebook"></i></a></li>
-            <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-twitter-alt"></i></a></li>
-            <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-linkedin"></i></a></li>
-            <li class="list-inline-item"><a href="#" class="text-dark"><i class="ti-github"></i></a></li>
-          </ul>
-        </div>
-      </div>
     </div>
-  </div>
-  <div class="text-center">
-    <p>Copyright ©<script>var CurrentYear = new Date().getFullYear()
-    document.write(CurrentYear)</script> a theme by themefisher / More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
-  </div>
+
+
+    <div class="text-center">
+        <p>Copyright ©
+            <script>var CurrentYear = new Date().getFullYear()
+    document.write(CurrentYear)
+            </script>
+            a theme by themefisher / More Templates <a href="http://qikuedu.com/" target="_blank"
+                                                       title="模板之家">奇酷出品</a> - Collect from <a
+                    href="http://qikuedu.com/" title="网页模板" target="_blank">来自-手鞠</a></p>
+    </div>
 </footer>
 
 <!-- jQuery -->
